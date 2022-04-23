@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ジャンケン</title>
+    <!-- CSS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hina+Mincho&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <header class="page-header">
+        <h1>
+            <a href="index.html">
+                <img class="logo" src="images/logo.png" alt="梅田神社">
+            </a>
+        </h1>
+        <nav>
+            <ul class="main-nav">
+                <li><a href="index.html">TOP</a></li>
+                <li><a href="yakudoshi.html">厄除け</a></li>
+                <li><a href="omikuji.html">おみくじ</a></li>
+                <li><a href="jyanken.html">祭り</a></li>
+                <li><a href="countdown.html">年越し</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="jyankenpage">
+
+        <h1>勝ったらもう1個</h1>
+
+
+        <h3>出す手を選択してボタンをクリックしてね！</h3>
+        <select id="myhand">
+            <option value="go">グー</option>
+            <option value="choki">チョキ</option>
+            <option value="pa">パー</option>
+        </select>
+        <button id="button">勝負する</button>
+        <p id="output1"></p>
+        <img id="imgplayer" src="images/boy.png">
+        <img id="imgcom" src="images/anzuame.png">
+
+    </section>
+
+    <footer>
+        <h3>
+            <img class="footerlogo" src="images/logo.png" alt="梅田神社">
+        </h3>
+        <p>〒111-2222 大阪府大阪市北区梅田〇番地△丁目□号　電話：06-1122-33XX（代表）</p>
+        <p>［開門時間］通年：午前6時 　　　　　　　　　　　　　　 </p>
+        <p>［閉門時間］1, 2, 11, 12月：午後5時3月〜10月：午後6時</p>
+        <p>※祭典・行事・その他の事情により変更となる場合がございます。</p>
+        <p>
+            <small>&copy; 2022 梅田神社</small>
+        </p>
+    </footer>
+
+    <script>
+        'use strict';
+
+        //comの手を0～2で表示
+        function jyanken() {
+            const comhand = Math.floor(Math.random() * 3);
+            return comhand;
+        }
+
+        //自分のグーチョキパーをセレクトボックスより取得し番号に変換。
+        //comの手の番号を受け取りメッセージを表示。
+        document.getElementById('button').onclick = function () {
+            let imgP = document.getElementById('imgplayer')
+            let imgC = document.getElementById('imgcom')
+            let myhand = document.getElementById('myhand').value;
+            if (myhand === 'go') {
+                myhand = 0;
+            } else if (myhand === 'choki') {
+                myhand = 1;
+            } else if (myhand === 'pa') {
+                myhand = 2;
+            }
+            let comhand = jyanken();
+            console.log('myhand' + myhand, 'comhand' + comhand);
+            let message1;
+            if (myhand === comhand) {
+                message1 = 'あいこ。もう１度選択してクリックしてね。'
+            } else if ((myhand + 10 - comhand) % 3 === 0) {
+                message1 = 'あなたの勝ち。あんず飴もう1個ゲット！'
+            } else {
+                message1 = 'あなたの負け。残念...また挑戦してね！'
+            }
+            document.getElementById('output1').textContent = message1;
+            imgP.src = `images/${myhand}.png`;
+            imgC.src = `images/${comhand}.png`;
+        }
+
+
+    </script>
+</body>
+
+</html>

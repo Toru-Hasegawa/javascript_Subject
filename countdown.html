@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>年越しカウントダウン</title>
+    <!-- CSS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hina+Mincho&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <header class="page-header">
+        <h1>
+            <a href="index.html">
+                <img class="logo" src="images/logo.png" alt="梅田神社">
+            </a>
+        </h1>
+        <nav>
+            <ul class="main-nav">
+                <li><a href="index.html">TOP</a></li>
+                <li><a href="yakudoshi.html">厄除け</a></li>
+                <li><a href="omikuji.html">おみくじ</a></li>
+                <li><a href="jyanken.html">祭り</a></li>
+                <li><a href="countdown.html">年越し</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="countdownpage">
+
+        <h1>年越しカウントダウン</h1>
+        <img id="joyanokane_image" src="images/joyanokane.png">
+
+
+        <h2>新しい年を迎えるまで</h2>
+        <p class="timer">
+            あと
+            <span id="day"></span> 日
+            <span id="hour"></span> 時間
+            <span id="min"></span> 分
+            <span id="sec"></span> 秒
+        </p>
+
+    </section>
+
+    <footer>
+        <h3>
+            <img class="footerlogo" src="images/logo.png" alt="梅田神社">
+        </h3>
+        <p>〒111-2222 大阪府大阪市北区梅田〇番地△丁目□号　電話：06-1122-33XX（代表）</p>
+        <p>［開門時間］通年：午前6時 　　　　　　　　　　　　　　 </p>
+        <p>［閉門時間］1, 2, 11, 12月：午後5時3月〜10月：午後6時</p>
+        <p>※祭典・行事・その他の事情により変更となる場合がございます。</p>
+        <p>
+            <small>&copy; 2022 梅田神社</small>
+        </p>
+    </footer>
+
+    <script>
+        'use strict'
+
+        /**
+         * カウントダウン関数
+         * 目的時間(due)まであとどれだけか計算する。
+         * @param:due---目的時刻 Dateオブジェクト new Date(目的時刻)
+         * @return: 配列 count -- [days, hours, min, sec]
+         */
+        function countdown(due) {
+            const now = new Date();
+
+            const rest = due.getTime() - now.getTime();
+            const sec = Math.floor(rest / 1000) % 60;
+            const min = Math.floor(rest / 1000 / 60) % 60;
+            const hours = Math.floor(rest / 1000 / 60 / 60) % 24;
+            const days = Math.floor(rest / 1000 / 60 / 60 / 24);
+            const count = [days, hours, min, sec];
+
+            return count;
+        }
+
+
+        // 今年の年を取得
+        const currentYear = new Date().getFullYear();
+        // 来年の年を取得
+        const nextYear = currentYear + 1;
+        // 来年の1月1日00:00:00を取得
+        const goal = new Date(`January 01 ${nextYear} 00:00:00`);
+
+        /**
+        * 目的時刻(goal)までの時間(counter)を画面に表示する。
+        * 最後にrefresh()を実行
+        * @param: なし
+        * @return: なし
+        */
+        function recalc() {
+            const counter = countdown(goal);
+            document.getElementById('day').textContent = counter[0];
+            document.getElementById('hour').textContent =
+                String(counter[1]).padStart(2, '0');
+            document.getElementById('min').textContent =
+                String(counter[2]).padStart(2, '0');
+            document.getElementById('sec').textContent =
+                String(counter[3]).padStart(2, '0');
+            refresh();
+        }
+
+        /**
+        * 1秒後に recalc を実行
+        */
+        function refresh() {
+            setTimeout(recalc, 1000);
+        }
+
+        recalc();
+
+
+    </script>
+</body>
+
+</html>

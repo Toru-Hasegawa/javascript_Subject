@@ -1,0 +1,170 @@
+@charset "UTF-8";
+
+/*
+ 共通部分
+ -----------------------------------*/
+html {
+    font-size: 100%;
+}
+
+img {
+    max-width: 100%;
+}
+
+/*
+ HEADER
+--------------------------------------*/
+.page-header {
+    text-align: center;
+}
+
+.main-nav {
+    display: flex;
+    justify-content: space-around;
+    list-style-type: none;
+    margin-bottom: 30px;
+}
+
+.main-nav li {
+    margin-left: 30px;
+}
+
+.main-nav a {
+    font-family: 'Hina Mincho', serif;
+    font-size: 1.8rem;
+    color: black;
+    text-decoration: none;
+}
+
+
+.main-nav a:hover {
+    color: #a88332;
+    text-decoration: underline;
+    text-decoration-color: #a88332;
+}
+
+
+/* HOME 
+--------------------------*/
+.image_box {
+    text-align: center;
+    margin-bottom: 30px;
+    overflow: hidden
+}
+
+.image_box img {
+    width: 100%;
+    height: auto;
+    animation: animationZoom1 5s ease-in-out infinite;
+}
+
+@keyframes animationZoom1 {
+    100% {
+        transform: scale(1.1)
+    }
+}
+
+.js-animation {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(40px);
+    transition: all 1s;
+}
+
+.js-animation.is-show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0px);
+}
+
+.leftImg {
+    float: left;
+}
+
+.rightImg {
+    float: right;
+}
+
+.clearfix::after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+#imgMenu {
+    background: #fff;
+}
+
+
+#imgMenu img:hover {
+    transition-duration: 0.5s;
+    opacity: 0.6;
+}
+
+/* 厄年
+--------------------------*/
+.yakudoshipage {
+    text-align: center;
+}
+
+#flexBox {
+    display: flex;
+    justify-content: space-around;
+}
+
+#kitou {
+    text-align: center;
+}
+
+table {
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 60px;
+}
+
+table tr,
+table th {
+    width: 300px;
+}
+
+
+/* おみくじ
+--------------------------*/
+.omikujipage {
+    text-align: center;
+}
+
+#redborder {
+    border-bottom: solid red;
+}
+
+
+/* ジャンケン
+--------------------------*/
+.jyankenpage {
+    text-align: center;
+}
+
+/* カウントダウン
+--------------------------*/
+.countdownpage {
+    text-align: center;
+}
+
+.timer {
+    font-size: 2rem;
+}
+
+/* フッター
+--------------------------------*/
+footer {
+    background-color: #d7cebb;
+    padding: 10px;
+    margin-top: 30px;
+    text-align: center;
+}
+
+.footerlogo {
+    height: 100px;
+    width: auto;
+}

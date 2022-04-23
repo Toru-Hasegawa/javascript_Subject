@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>厄年早見プログラム</title>
+    <!-- CSS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hina+Mincho&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <header class="page-header">
+        <h1>
+            <a href="index.html">
+                <img class="logo" src="images/logo.png" alt="梅田神社">
+            </a>
+        </h1>
+        <nav>
+            <ul class="main-nav">
+                <li><a href="index.html">TOP</a></li>
+                <li><a href="yakudoshi.html">厄除け</a></li>
+                <li><a href="omikuji.html">おみくじ</a></li>
+                <li><a href="jyanken.html">祭り</a></li>
+                <li><a href="countdown.html">年越し</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="yakudoshipage">
+
+        <h1>厄年早見プログラム</h1>
+
+        <h2>生まれた年を入力</h2>
+
+        <div id="flexBox">
+            <div>
+                <h2>男性</h2>
+                <select id="mannengo">
+                    <option value="reiwa">令和</option>
+                    <option value="heisei">平成</option>
+                    <option value="syowa">昭和</option>
+                    <option value="seireki">西歴</option>
+                </select>
+                <input type="text" id="manbirth">年
+                <button id="button1">厄年を調べる</button>
+                <div></div>
+                <p>あなたの本厄は...</p>
+                <p id="output1"></p>
+                <p id="output2"></p>
+                <p id="output3"></p>
+            </div>
+
+            <div>
+                <h2>女性</h2>
+                <select id="womannengo">
+                    <option value="reiwa">令和</option>
+                    <option value="heisei">平成</option>
+                    <option value="syowa">昭和</option>
+                    <option value="seireki">西歴</option>
+                </select>
+                <input type="text" id="womanbirth">年
+                <button id="button2">厄年を調べる</button>
+                <p>あなたの本厄は...</p>
+                <p id="output4"></p>
+                <p id="output5"></p>
+                <p id="output6"></p>
+                <p id="output7"></p>
+            </div>
+        </div>
+
+        <div id="kitou">
+            <h2>ご祈祷料</h2>
+            <table border="1">
+                <tr>
+                    <th>内容</th>
+                    <th>特別祈祷</th>
+                    <th>年祈祷</th>
+                </tr>
+                <tr>
+                    <td>料金</td>
+                    <td>10,000円</td>
+                    <td>5,000円</td>
+                </tr>
+            </table>
+            <p>※特別祈祷・・・直接本堂にてお祓いを行います。また祈祷札をお渡しいたします。</p>
+            <p>※年祈祷・・・祈祷札をお渡しいたします。ご自宅に持ち帰りお祀りください。　　</p>
+        </div>
+    </section>
+
+    <footer>
+        <h3>
+            <img class="footerlogo" src="images/logo.png" alt="梅田神社">
+        </h3>
+        <p>〒111-2222 大阪府大阪市北区梅田〇番地△丁目□号　電話：06-1122-33XX（代表）</p>
+        <p>［開門時間］通年：午前6時 　　　　　　　　　　　　　　 </p>
+        <p>［閉門時間］1, 2, 11, 12月：午後5時3月〜10月：午後6時</p>
+        <p>※祭典・行事・その他の事情により変更となる場合がございます。</p>
+        <p>
+            <small>&copy; 2022 梅田神社</small>
+        </p>
+    </footer>
+
+    <script>
+        'use strict'
+
+        //①変数manhonyakuを定義
+        let manhonyaku;
+
+
+        // ③（男）birathデータを受け取りhonyakuをreturn
+        function manyakudoshi(nengo, birth) {
+            if (nengo === 'syowa') {
+                manhonyaku = parseInt(birth) + 1925 + 24;
+                return manhonyaku
+            } else if (nengo === 'heisei') {
+                manhonyaku = parseInt(birth) + 1988 + 24;
+                return manhonyaku
+            } else if (nengo === 'reiwa') {
+                manhonyaku = parseInt(birth) + 2018 + 24;
+                return manhonyaku
+            } else if (nengo === 'seireki') {
+                manhonyaku = parseInt(birth) + 24;
+                return manhonyaku
+            }
+        }
+
+        //②西暦データを定数sに代入しfunction(yakudoshi)へ値を送る。
+        //④honyakuのretunを受け取り,output1～3に表示。
+        document.getElementById('button1').onclick = function () {
+            const nengo = document.getElementById('mannengo').value;
+            const birth = document.getElementById('manbirth').value;
+            manhonyaku = manyakudoshi(nengo, birth);                                    //yakudoshiに西暦データを送り本厄のreturnを受け取る。
+            document.getElementById('output1').textContent = `${manhonyaku}年`;
+            document.getElementById('output2').textContent = `${manhonyaku + 17}年`;
+            document.getElementById('output3').textContent = `${manhonyaku + 36}年`;
+        }
+
+
+        /*ここから女性
+        ---------------------------------------------------------------------
+        */
+
+        //①変数honyakuを定義
+        let womanhonyaku;
+
+
+        // ③（女）birathデータを受け取りhonyakuをreturn
+        function womanyakudoshi(nengo, birth) {
+            if (nengo === 'syowa') {
+                womanhonyaku = parseInt(birth) + 1925 + 18;
+                return womanhonyaku
+            } else if (nengo === 'heisei') {
+                womanhonyaku = parseInt(birth) + 1988 + 18;
+                return womanhonyaku
+            } else if (nengo === 'reiwa') {
+                womanhonyaku = parseInt(birth) + 2018 + 18;
+                return womanhonyaku
+            } else if (nengo === 'seireki') {
+                womanhonyaku = parseInt(birth) + 18;
+                return womanhonyaku
+            }
+        }
+
+        //②西暦データを定数sに代入しfunction(yakudoshi)へ値を送る。
+        //④honyakuのretunを受け取り,output4～6に表示。
+        document.getElementById('button2').onclick = function () {
+            const nengo = document.getElementById('womannengo').value;
+            const birth = document.getElementById('womanbirth').value;
+            womanhonyaku = womanyakudoshi(nengo, birth);                                    //yakudoshiに西暦データを送り本厄のreturnを受け取る。
+            document.getElementById('output4').textContent = `${womanhonyaku}年`;
+            document.getElementById('output5').textContent = `${womanhonyaku + 14}年`;
+            document.getElementById('output6').textContent = `${womanhonyaku + 18}年`;
+            document.getElementById('output7').textContent = `(${womanhonyaku + 42}年)`;
+        }
+    </script>
+</body>
+
+</html>

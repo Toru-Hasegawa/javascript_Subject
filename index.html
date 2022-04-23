@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>梅田神社</title>
+    <!-- CSS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hina+Mincho&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <header class="page-header">
+
+        <h1>
+            <a href="index.html">
+                <img class="logo" src="images/logo.png" alt="梅田神社">
+            </a>
+        </h1>
+        <nav>
+            <ul class="main-nav">
+                <li><a href="index.html">TOP</a></li>
+                <li><a href="yakudoshi.html">厄除け</a></li>
+                <li><a href="omikuji.html">おみくじ</a></li>
+                <li><a href="jyanken.html">祭り</a></li>
+                <li><a href="countdown.html">年越し</a></li>
+            </ul>
+        </nav>
+
+        <div class="container">
+            <div class="slide">
+                <div class="image_box">
+                    <img id="main_image" src="images/image1.jpg">
+                </div>
+            </div>
+        </div>
+
+    </header>
+
+
+    <div class="clearfix" id="imgMenu">
+        <a href="yakudoshi.html">
+            <div class="element js-animation leftImg"><img src="images/image6.jpg" alt="画像6"></div>
+        </a>
+        <a href="yakudoshi.html">
+            <div class="element js-animation rightImg"><img src="images/image7.jpg" alt="画像7"></div>
+        </a>
+        <a href="jyanken.html">
+            <div class="element js-animation leftImg"><img src="images/image8.jpg" alt="画像8"></div>
+        </a>
+        <a href="countdown.html">
+            <div class="element js-animation rightImg"><img src="images/image9.jpg" alt="画像9"></div>
+        </a>
+    </div>
+
+    <footer>
+        <h3>
+            <img class="footerlogo" src="images/logo.png" alt="梅田神社">
+        </h3>
+        <p>〒111-2222 大阪府大阪市北区梅田〇番地△丁目□号　電話：06-1122-33XX（代表）</p>
+        <p>［開門時間］通年：午前6時 　　　　　　　　　　　　　　 </p>
+        <p>［閉門時間］1, 2, 11, 12月：午後5時3月〜10月：午後6時</p>
+        <p>※祭典・行事・その他の事情により変更となる場合がございます。</p>
+        <p>
+            <small>&copy; 2022 梅田神社</small>
+        </p>
+    </footer>
+    <script>
+        'use strict';
+
+        const images = [
+            'images/image1.jpg',
+            'images/image2.jpg',
+            'images/image3.jpg',
+            'images/image4.jpg',
+            'images/image5.jpg',
+        ];
+
+        let current = 0;
+
+        function changeImage(num) {
+            if (current + num >= 0 && current + num < images.length) {
+                current += num;
+                document.getElementById('main_image').src = images[current];
+            } else if (current + num === images.length) {
+                current = (current - 4);
+                document.getElementById('main_image').src = images[current];
+            }
+        }
+
+        function change() {
+            changeImage(1);
+            refresh();
+        }
+        function refresh() {
+            setTimeout(change, 5000);
+        }
+
+        refresh();
+
+        /**
+         * 到達したら要素を表示させる
+        */
+        function showElementAnimation() {
+
+            let element = document.getElementsByClassName('js-animation'); //4枚写真を取得しelementに代入
+            if (!element) return; // 要素がなかったら処理をキャンセル
+
+            let showTiming = window.innerHeight > 768 ? 200 : 40; // 要素が出てくるタイミング
+            let scrollY = window.pageYOffset; //垂直方向のスクロール量
+            let windowH = window.innerHeight; //ウィンドウの内部の高さをピクセル単位で返す。
+
+            for (let i = 0; i < element.length; i += 1) {
+                let elemClientRect = element[i].getBoundingClientRect(); let elemY = scrollY + elemClientRect.top; if (scrollY + windowH - showTiming > elemY) {
+                    element[i].classList.add('is-show');
+                } else if (scrollY + windowH < elemY) {
+                    // 上にスクロールして再度非表示
+                    element[i].classList.remove('is-show');
+                }
+            }
+        }
+        showElementAnimation();
+        window.addEventListener('scroll', showElementAnimation);
+
+    </script>
+</body>
+
+</html>

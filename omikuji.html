@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>おみくじ</title>
+    <!-- CSS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hina+Mincho&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <header class="page-header">
+        <h1>
+            <a href="index.html">
+                <img class="logo" src="images/logo.png" alt="梅田神社">
+            </a>
+        </h1>
+        <nav>
+            <ul class="main-nav">
+                <li><a href="index.html">TOP</a></li>
+                <li><a href="yakudoshi.html">厄除け</a></li>
+                <li><a href="omikuji.html">おみくじ</a></li>
+                <li><a href="jyanken.html">祭り</a></li>
+                <li><a href="countdown.html">年越し</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="omikujipage">
+
+        <h1>おみくじ</h1>
+
+
+        <h2><span id="redborder">1日1回まで</span>今日の運勢占います！</h2>
+        <img id="omikuji_image" src="images/omijikuji.png">
+
+        <button id="button">おみくじを引く</button>
+        <b>
+            <p id="output1"></p>
+        </b>
+        <p id="output2"></p>
+        <p id="output3"></p>
+
+    </section>
+
+    <footer>
+        <h3>
+            <img class="footerlogo" src="images/logo.png" alt="梅田神社">
+        </h3>
+        <p>〒111-2222 大阪府大阪市北区梅田〇番地△丁目□号　電話：06-1122-33XX（代表）</p>
+        <p>［開門時間］通年：午前6時 　　　　　　　　　　　　　　 </p>
+        <p>［閉門時間］1, 2, 11, 12月：午後5時3月〜10月：午後6時</p>
+        <p>※祭典・行事・その他の事情により変更となる場合がございます。</p>
+        <p>
+            <small>&copy; 2022 梅田神社</small>
+        </p>
+    </footer>
+
+    <script>
+        'use strict';
+
+        /**
+         * doaw関数
+         * @param: なし
+         * @return: 数字0～4
+         */
+        function draw() {
+            const kuji = Math.floor(Math.random() * 5);
+            return kuji;
+        }
+
+
+
+        document.getElementById('button').onclick = function () {
+            const kekka = draw();
+            let message1;
+            let message2;
+            let img = document.getElementById('omikuji_image')
+            let imgType;
+            if (kekka === 0) {
+                message1 = '大吉'
+                message2 = '最高です。今日一日なにしてもうまくいきます。'
+                imgType = 'daikichi'
+            } else if (kekka === 1) {
+                message1 = '中吉'
+                message2 = 'いい1日です。大概のことは思うように物事が進みます。'
+                imgType = 'chuukichi'
+            } else if (kekka === 2) {
+                message1 = '小吉'
+                message2 = '平凡な1日。なにごともなく過ぎ去ります。'
+                imgType = 'syoukichi'
+            } else if (kekka === 3) {
+                message1 = '凶'
+                message2 = 'なんとなくついてない1日。大事なことをするのは今日は避けたほうがいいです。'
+                imgType = 'kyou'
+            } else if (kekka === 4) {
+                message1 = '大凶'
+                message2 = '災難がふりかかる可能性が高いです。できる限り家にいて極力人と会うのは避けましょう。'
+                imgType = 'daikyou'
+            }
+            document.getElementById('output1').textContent = message1;
+            document.getElementById('output2').textContent = message1 + 'のあなた';
+            document.getElementById('output3').textContent = message2;
+            img.src = `images/${imgType}.png`;
+        }
+
+    </script>
+</body>
+
+</html>
